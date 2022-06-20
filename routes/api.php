@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
+Route::get('/courses/{id}', [CourseController::class, 'show'])->name('course.show');
+
 
 Route::get('/', function() {
     return response()->json(['Success' => true]);
