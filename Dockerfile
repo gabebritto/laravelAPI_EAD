@@ -2,7 +2,7 @@ FROM php:8.1.1-fpm
 
 # Arguments
 ARG user=gabriel
-ARG uid=1000
+ARG uid=1001
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
