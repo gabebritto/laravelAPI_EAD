@@ -16,7 +16,7 @@ class LessonResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->strtolower($this->name),
+            'name' => ucwords(strtolower($this->name)),
             'description' => $this->description,
             'video' => $this->video,
         ];

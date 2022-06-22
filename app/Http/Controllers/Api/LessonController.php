@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\LessonResource;
 use App\Repositories\LessonRepository;
 use Illuminate\Http\Request;
