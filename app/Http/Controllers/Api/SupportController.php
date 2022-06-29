@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Repositories\SupportRepository;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSupport;
 use App\Http\Resources\SupportResource;
 use Illuminate\Http\Request;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
@@ -22,4 +23,10 @@ class SupportController extends Controller
         return SupportResource::collection($this->repository->getSupports($request->all()));
     }
 
+    public function store(StoreSupport $request)
+    {
+        $support = $this->repository->createNewSupport($request->validated());
+
+        return new SupportResource($support);
+    }
 }

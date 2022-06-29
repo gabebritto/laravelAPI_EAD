@@ -15,7 +15,8 @@ class Support extends Model
 
     protected $fillable = [
         'status',
-        'description'
+        'description',
+        'lesson_id'
     ];
 
     public $statusOptions = [
