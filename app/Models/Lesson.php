@@ -22,6 +22,6 @@ class Lesson extends Model
     
     public function supports()
     {
-        $this->hasMany(Support::class);
+        return $this->hasMany(Support::class);
     }
 }

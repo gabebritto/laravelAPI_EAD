@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reply_supports', function (Blueprint $table) {
-            $table->id();
+        Schema::create('reply_support', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('user_id')->nullable(false);
+            $table->uuid('support_id')->nullable(false);
+            $table->text('description');
             $table->timestamps();
         });
     }
