@@ -25,9 +25,11 @@ class SupportRepository
                         {
                             $query->where('lesson_id', $filters['lesson']);
                         }
+
                         if (isset($filters['status'])){
                             $query->where('status', $filters['status']);
                         }
+                        
                         if (isset($filters['filter'])){
                             $filter = $filters['filter'];
                             $query->where('description', 'LIKE', "%{$filter}%");
