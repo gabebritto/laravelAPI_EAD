@@ -4,10 +4,13 @@ namespace App\Repositories;
 
 use App\Models\Support;
 use App\Models\User;
+use App\Repositories\Traits\RepositoryTrait;
 use PhpParser\Node\Expr\FuncCall;
 
 class SupportRepository
 {
+    use RepositoryTrait;
+
     protected $entity;
 
     public function __construct(Support $model)
@@ -15,10 +18,15 @@ class SupportRepository
         $this->entity = $model;
     }
     
+    public function getMySupports(array $filters=[])
+    {
+        $filters['user'] = true;
+        return $this->getSupports($filters);
+    }
+
     public function getSupports(array $filters=[])
     {
-        return $this->getUserAuth()
-                    ->supports()
+        return $this->entity
                     ->where(function($query) use ($filters)
                     {
                         if (isset($filters['lesson']))
@@ -26,15 +34,24 @@ class SupportRepository
                             $query->where('lesson_id', $filters['lesson']);
                         }
 
-                        if (isset($filters['status'])){
+                        if (isset($filters['status']))
+                        {
                             $query->where('status', $filters['status']);
                         }
                         
-                        if (isset($filters['filter'])){
+                        if (isset($filters['filter']))
+                        {
                             $filter = $filters['filter'];
                             $query->where('description', 'LIKE', "%{$filter}%");
                         }
+
+                        if (isset($filters['user']))
+                        {
+                            $user = $this->getUserAuth();
+                            $query->where('user_id',$user->id);
+                        }
                     })
+                    ->with('replies')
                     ->orderBy('updated_at')
                     ->get();
     }
@@ -66,8 +83,4 @@ class SupportRepository
         return $this->entity->findOrFail($id);
     }
 
-    private function getUserAuth(): User
-    {
-        return User::first();
-    }
 }

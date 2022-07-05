@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Repositories\SupportRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreReplySupport;
 use App\Http\Requests\StoreSupport;
-use App\Http\Resources\ReplySupportResource;
 use App\Http\Resources\SupportResource;
 use Illuminate\Http\Request;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
@@ -31,9 +29,9 @@ class SupportController extends Controller
         return new SupportResource($support);
     }
 
-    public function createReply(StoreReplySupport $request, $supportId)
+    public function mySupports(Request $request)
     {
-        $reply = $this->repository->createReplyToSupportId($supportId, $request->validated());
-        return new ReplySupportResource($reply);
+        $supports = $this->repository->getMySupports($request->all());
+        return SupportResource::collection($supports);
     }
 }
