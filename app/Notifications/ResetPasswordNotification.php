@@ -40,7 +40,7 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = config('app.url_frontend' . "/reset/{$this->token}");
+        $url = config('app.url_frontend') . "/reset/{$this->token}";
 
         return (new MailMessage)
                     ->subject('Nova Senha')

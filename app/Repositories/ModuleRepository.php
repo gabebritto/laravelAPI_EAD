@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Course;
 use App\Models\Module;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -16,7 +17,9 @@ class ModuleRepository
     
     public function getModulesByCourseId(string $courseId)
     {
-        return $this->entity->
-            where('course_id', $courseId)->get();
+        if(Course::findOrFail($courseId))
+        {
+            return $this->entity->where('course_id', $courseId)->get();
+        }
     }
 }
