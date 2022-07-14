@@ -29,7 +29,6 @@ class AuthTest extends TestCase
             'password' => 'password',
             'device_name' => 'test' 
         ]);
-        dd($response);
         $response->assertStatus(200);
     }
 
