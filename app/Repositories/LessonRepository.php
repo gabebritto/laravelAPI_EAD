@@ -41,7 +41,7 @@ class LessonRepository
 
         if($view){
             return $view->update([
-                'qty' => $lessonId
+                'qty' => $view->qty + 1
             ]);
         }
 
